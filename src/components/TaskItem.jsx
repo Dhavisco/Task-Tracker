@@ -2,6 +2,8 @@
 import propTypes from "prop-types";
 
 const TaskItem = (props) => {
+  const onDelete = props.onDelete;
+  const onToggle = props.onToggle;
   
   // const clickHandler = () =>{
   //     console.log('clicked')
@@ -20,7 +22,7 @@ const TaskItem = (props) => {
      <div
        className={`task ${
          task.completed ? "bg-gray-200" : ""
-       } p-4 flex justify-between items-center`}
+       } px-6 py-3 flex justify-between items-center`}
      >
        <div onClick={toggleHandler} className="flex items-center">
          <input
@@ -28,7 +30,7 @@ const TaskItem = (props) => {
            checked={task.completed}
            onChange={toggleHandler}
          />
-         <span className={task.completed ? "line-through" : undefined}>
+         <span className= {`ml-1 font-semibold ${task.completed ? "text-[#cf0202c2] line-through" : undefined}`}>
            {task.name}
          </span>
        </div>
@@ -67,5 +69,7 @@ const TaskItem = (props) => {
 
 TaskItem.propTypes = {
   task: propTypes.object,
+  onDelete: propTypes.func,
+  onToggle:propTypes.func
 };
 export default TaskItem;
