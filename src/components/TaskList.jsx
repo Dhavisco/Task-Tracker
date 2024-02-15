@@ -12,7 +12,7 @@ const onToggle = props.onToggle;
 
   return (
     <div className="row">
-      <div className="col-12 pl-6">
+      <div className="col-12 lg:pl-6">
         {tasks.map((task) => {
           return <TaskItem task={task} onDelete={onDelete} onToggle={onToggle} key={task.id}></TaskItem>;
         })}
@@ -24,7 +24,7 @@ const onToggle = props.onToggle;
 TaskList.propTypes = {
   tasks: PropTypes.array,
   onDelete: PropTypes.func,
-  onToggle: PropTypes.array,
+  onToggle: PropTypes.func,
 };
 
 export default TaskList;

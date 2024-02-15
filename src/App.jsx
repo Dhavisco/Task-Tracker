@@ -44,7 +44,7 @@ function App() {
  }
 
   return (
-    <div className="App">
+    <div className="App flex items-center justify-center">
       <div className="container">
         <TaskForm onAdd={addTask}></TaskForm>
         <TaskList tasks={tasks} onDelete={deleteTask} onToggle={toggleTask}></TaskList>
