@@ -1,6 +1,6 @@
 // App.jsx
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TaskList from "./components/TaskList";
 import TaskForm from "./components/TaskForm";
 
@@ -19,6 +19,25 @@ function App() {
   ];
   //State to control Task Input
   const [tasks, setTasks] = useState(dummy);
+
+  //Extra Feature - Local Storage
+  //Local storage implementation
+  useEffect(()=>{
+    try {
+      const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+      if (storedTasks) {
+        setTasks(storedTasks);
+      }
+    } catch (error) {
+      console.error("Error parsing task data from local storage:", error);
+    }
+  }, [])
+
+  useEffect(()=>{
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
+
+
 
   const addTask = (task) => {
     const id = Math.floor(Math.random() * 1000) + 1;
