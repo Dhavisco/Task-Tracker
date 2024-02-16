@@ -58,11 +58,9 @@ const TaskItem = (props) => {
 
    return (
      <div
-       className={`task ${
-         task.completed ? "bg-gray-300 border-gray-400" : ""
-       } ${
-         isEditing ? "bg-[#dda73191]" : "bg-[#d3991cea]"
-       } px-6 py-3 border-b-2 my-1 border-gray-200 rounded flex justify-between items-center`}
+       className={`task ${task.completed ? " border-gray-400" : ""} ${
+         isEditing ? "bg-[#dda73191]" : ""
+       } px-6 py-3 border-b-2 my-1 border-gray-200 bg-[#d3991cea] rounded flex justify-between items-center`}
      >
        <div onClick={toggleHandler} className="flex items-center">
          <input
@@ -72,7 +70,7 @@ const TaskItem = (props) => {
          />
          {isEditing ? (
            <input
-             className="border-b-5 p-1 px-2 mx-2 text-red-500 rounded-md focus:outline-none focus:border-blue-800"
+             className="border-b-5 p-1 px-2 mx-2 w-[10rem] lg-[16rem]  text-red-500 rounded-md focus:outline-none focus:border-blue-800"
              type="text"
              value={editedName}
              onChange={editingChangeHandler}
