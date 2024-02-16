@@ -60,7 +60,7 @@ const TaskItem = (props) => {
      <div
        className={`task ${task.completed ? " border-gray-400" : ""} ${
          isEditing ? "bg-[#dda73191]" : ""
-       } px-6 py-3 border-b-2 my-1 border-gray-200 bg-[#d3991cea] rounded flex justify-between items-center`}
+       } px-6 py-3 border-b-2 m-1 border-gray-200 bg-[#d3991cea] rounded flex justify-between items-center`}
      >
        <div onClick={toggleHandler} className="flex items-center">
          <input
