@@ -1,28 +1,68 @@
 // TaskItem.jsx
 import propTypes from "prop-types";
+import { useRef, useState } from "react";
 
 const TaskItem = (props) => {
-  const onDelete = props.onDelete;
-  const onToggle = props.onToggle;
-  
-  // const clickHandler = () =>{
-  //     console.log('clicked')
-  // }
+
+   const task = props.task;
+   const onDelete = props.onDelete;
+   const onToggle = props.onToggle;
+   const onEdit = props.onEdit;
+   
+  const [isEditing, setEditing] = useState(false);
+  const [editedName, setEditedName] = useState(task.name);
+  const inputRef = useRef(null);
+
+ 
+
 
   const toggleHandler = () => {
-       onToggle(task.id)
+    if(!isEditing){
+      onToggle(task.id);
+    }
+       
+
   }
 
   const deleteHandler = () => {
     onDelete(task.id);
    };
-  const task = props.task;
+
+// Task Edit Feature
+  const editHandler = () => {
+    setEditing(true);
+  }
+
+  const editingChangeHandler = (event) => {
+    setEditedName(event.target.value);
+  }
+
+  const editSaveHandler = () => {
+    // Save edited name and exit editing mode
+    if (editedName.trim() !== "") {
+      onEdit(task.id, editedName.trim());
+    } else {
+      setEditedName(task.name); // Reset to original name if edited name is empty
+    }
+    setEditing(false); // Exit editing mode
+    inputRef.current.blur(); // Remove focus from the input field
+  };
+
+  const editCancelHandler = () => {
+    setEditing(false);
+    setEditedName(task.name);
+  };
+
+
+  
 
    return (
      <div
        className={`task ${
-         task.completed ? "bg-gray-200" : ""
-       } px-6 py-3 flex justify-between items-center`}
+         task.completed ? "bg-gray-300 border-gray-400" : ""
+       } ${
+         isEditing ? "bg-[#dda73191]" : "bg-[#d3991cea]"
+       } px-6 py-3 border-b-2 my-1 border-gray-200 rounded flex justify-between items-center`}
      >
        <div onClick={toggleHandler} className="flex items-center">
          <input
@@ -30,16 +70,58 @@ const TaskItem = (props) => {
            checked={task.completed}
            onChange={toggleHandler}
          />
-         <span className= {`ml-1 font-semibold ${task.completed ? "text-[#cf0202c2] line-through" : undefined}`}>
-           {task.name}
-         </span>
+         {isEditing ? (
+           <input
+             className="border-b-5 p-1 px-2 mx-2 text-red-500 rounded-md focus:outline-none focus:border-blue-800"
+             type="text"
+             value={editedName}
+             onChange={editingChangeHandler}
+           />
+         ) : (
+           <span
+             className={`ml-1 flex-1 cursor-pointer font-semibold ${
+               task.completed ? "text-[#cf0202c2] line-through" : undefined
+             }`}
+             onDoubleClick={editHandler} // or use an editbutton
+           >
+             {task.name}
+           </span>
+         )}
        </div>
-       <button
-         onClick={deleteHandler}
-         className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
-       >
-         Delete
-       </button>
+
+       <div>
+         {isEditing ? (
+           <>
+             <button
+               onClick={editSaveHandler}
+               className="bg-[#4CAF50] hover:bg-[#4caf4fcb] text-white font-bold py-1 px-2 mr-2 rounded"
+             >
+               Save
+             </button>
+             <button
+               onClick={editCancelHandler}
+               className="bg-[#FF9800] hover:bg-[#ff9900dc] text-white font-bold py-1 px-2 rounded"
+             >
+               Cancel
+             </button>
+           </>
+         ) : (
+           <>
+             <button
+               onClick={editHandler}
+               className="bg-[#4A90E2] hover:bg-[#4a91e2d2] text-white font-bold py-1 px-2 mr-2 rounded"
+             >
+               Edit
+             </button>
+             <button
+               onClick={deleteHandler}
+               className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+             >
+               Delete
+             </button>
+           </>
+         )}
+       </div>
      </div>
    );
 
@@ -70,6 +152,7 @@ const TaskItem = (props) => {
 TaskItem.propTypes = {
   task: propTypes.object,
   onDelete: propTypes.func,
-  onToggle:propTypes.func
+  onToggle:propTypes.func,
+  onEdit:propTypes.func
 };
 export default TaskItem;
