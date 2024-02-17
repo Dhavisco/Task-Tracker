@@ -1,6 +1,6 @@
 // TaskItem.jsx
 import propTypes from "prop-types";
-import { useRef, useState } from "react";
+import {useState} from "react";
 
 const TaskItem = (props) => {
 
@@ -11,7 +11,8 @@ const TaskItem = (props) => {
    
   const [isEditing, setEditing] = useState(false);
   const [editedName, setEditedName] = useState(task.name);
-  const inputRef = useRef(null);
+  const [editedDueDate, setEditedDueDate] = useState(task.dueDate)
+  // const inputRef = useRef(null);
 
  
 
@@ -37,20 +38,26 @@ const TaskItem = (props) => {
     setEditedName(event.target.value);
   }
 
+  const editingDueDateChangeHandler = (event) => {
+    setEditedDueDate(event.target.value);
+  }
+
   const editSaveHandler = () => {
     // Save edited name and exit editing mode
     if (editedName.trim() !== "") {
-      onEdit(task.id, editedName.trim());
+      onEdit(task.id, editedName.trim(), editedDueDate);
     } else {
-      setEditedName(task.name); // Reset to original name if edited name is empty
+      setEditedName(task.name);
+      setEditedDueDate(task.dueDate);
+      // Reset to original name and due date if edited name or edited date is empty
     }
     setEditing(false); // Exit editing mode
-    inputRef.current.blur(); // Remove focus from the input field
   };
 
   const editCancelHandler = () => {
     setEditing(false);
     setEditedName(task.name);
+    setEditedDueDate(task.dueDate);
   };
 
 
@@ -68,22 +75,43 @@ const TaskItem = (props) => {
            checked={task.completed}
            onChange={toggleHandler}
          />
+
          {isEditing ? (
-           <input
-             className="border-b-5 p-1 px-2 mx-2 w-[10rem] lg-[16rem]  text-red-500 rounded-md focus:outline-none focus:border-blue-800"
-             type="text"
-             value={editedName}
-             onChange={editingChangeHandler}
-           />
+           <>
+             <input
+               className="border-b-5 p-1 px-2 mx-2 w-[10rem] lg-[16rem]  text-red-500 rounded-md focus:outline-none focus:border-blue-800"
+               type="text"
+               value={editedName}
+               onChange={editingChangeHandler}
+             />
+             <input
+               type="date"
+               value={editedDueDate}
+               onChange={editingDueDateChangeHandler}
+               className="ml-2 border-b-5 p-1 px-2 mx-2 w-[10rem] lg-[16rem]  text-red-500 rounded-md focus:outline-none focus:border-blue-800"
+             />
+           </>
          ) : (
-           <span
-             className={`ml-1 flex-1 cursor-pointer font-semibold ${
-               task.completed ? "text-[#cf0202c2] line-through" : undefined
-             }`}
-             onDoubleClick={editHandler} // or use an editbutton
-           >
-             {task.name}
-           </span>
+           <>
+             <span
+               className={`ml-1 flex-1 cursor-pointer font-semibold ${
+                 task.completed ? "text-[#cf0202c2] line-through" : undefined
+               }`}
+               onDoubleClick={editHandler} // or use an editbutton
+             >
+               {task.name}
+             </span>
+             <span
+               className={`ml-4 flex cursor-pointer font-semibold ${
+                 task.completed
+                   ? "text-[#cf0202c2] line-through"
+                   : "text-gray-500"
+               }`}
+               onDoubleClick={editHandler} // or use an editbutton
+             >
+               {task.dueDate}
+             </span>
+           </>
          )}
        </div>
 

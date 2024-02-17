@@ -12,10 +12,10 @@ function App() {
     {
       name: "Learn React",
       id: 1,
-      date: "2023-01-02 10:00",
+      dueDate: "2023-01-02",
       completed: true,
     },
-    { name: "Read ", id: 2, date: "2023-01-01 15:00", completed: null },
+    { name: "Read ", id: 2, dueDate: "2023-01-01", completed: null },
   ];
   //State to control Task Input
   const [tasks, setTasks] = useState(dummy);
@@ -59,10 +59,10 @@ function App() {
     // The new state is re rendered.
   };
 
-  const editTaskName = (id, editedName) => {
+  const editTaskName = (id, editedName, editedDueDate) => {
     setTasks(
       tasks.map((task) => 
-        task.id === id ? { ...task, name: editedName } : task
+        task.id === id ? { ...task, name: editedName, dueDate:editedDueDate } : task
     )
     );
   };

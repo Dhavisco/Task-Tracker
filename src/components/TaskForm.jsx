@@ -5,20 +5,25 @@ const TaskForm = (props) => {
   const onAdd = props.onAdd;
 
   const [name, setName] = useState("");
+  const [dueDate, setDueDate] = useState("")
 
   //handles form submission process
   const submitHandler = (event) => {
     event.preventDefault(); // handles the form submission via JavaScript without reloading the page
 
-    if (!name.trim()) return; // This prevents adding empty or whitespace-only tasks.
-    onAdd({ name, completed: false }); //calls function to add new task
+    if (!name.trim() ) return; // This prevents adding empty or whitespace-only tasks.
+    onAdd({ name, completed: false, dueDate }); //calls function to add new task
     setName(""); // Resets the input field
+    setDueDate("")// Reset
   };
 
   const taskNameHandler = (event) => {
     setName(event.target.value); // receive input from the form and saves it to the name variable using state
   };
 
+  const dateHandler = (event) => {
+    setDueDate(event.target.value)
+}
   return (
     <div className="lg:ml-5 m-2 my-5 md:p-8 py-8 bg-[#291403] rounded-lg">
       <div className=" text-center text-white text-lg font-semibold mb-2 md:mb-4">
@@ -43,11 +48,25 @@ const TaskForm = (props) => {
             onChange={taskNameHandler}
           />
         </div>
+        <div className="form-control">
+          <label
+            htmlFor="DueDate"
+            className="mr-2 text-white text-lg font-bold"
+          >
+            Due Date
+          </label>
+          <input
+            type="date"
+            className="rounded px-3 py-1"
+            value={dueDate}
+            onChange={dateHandler}
+          />
+        </div>
         <div className="flex">
           <input
             type="submit"
             value={"Save Task"}
-            className="btn btn-block bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded"
+            className="btn btn-block bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded mt-2 md:mt-[-0.5rem]"
           />
         </div>
       </form>
