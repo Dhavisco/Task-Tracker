@@ -11,7 +11,7 @@ const TaskForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault(); // handles the form submission via JavaScript without reloading the page
 
-    if (!name.trim() ) return; // This prevents adding empty or whitespace-only tasks.
+    if (!name.trim() || !dueDate ) return; // This prevents adding empty or whitespace-only tasks.
     onAdd({ name, completed: false, dueDate }); //calls function to add new task
     setName(""); // Resets the input field
     setDueDate("")// Reset
