@@ -25,15 +25,15 @@ const TaskForm = (props) => {
     setDueDate(event.target.value)
 }
   return (
-    <div className="lg:ml-5 m-2 my-5 md:p-8 py-8 bg-[#291403] rounded-lg">
-      <div className=" text-center text-white text-lg font-semibold mb-2 md:mb-4">
+    <div className="lg:ml-7 m-2 my-5 md:p-8 py-8 bg-[#291403] rounded-lg">
+      <div className="text-center text-white text-lg font-semibold mb-2 md:mb-4">
         Would You Like To Add A New Task?
       </div>
       <form
-        className="add-form flex flex-col gap-3 md:flex-row md:justify-between items-center p-2"
+        className="add-form grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-6 items-center px-4"
         onSubmit={submitHandler}
       >
-        <div className="form-control flex mb-3 sm:mb-0">
+        <div className="form-control flex flex-col md:flex-row mb-3 sm:mb-0 md:col-span-2">
           <label
             htmlFor="Task"
             className="mr-2 text-white flex items-center text-lg font-bold"
@@ -43,12 +43,12 @@ const TaskForm = (props) => {
           <input
             type="text"
             placeholder="Hey! Add your Task"
-            className="rounded p-3 w-[15rem] md:w-[24rem] placeholder-[#999] placeholder-opacity-50 focus:placeholder-opacity-100 focus:placeholder-[#ff00009f]"
+            className="rounded p-3 flex-grow placeholder-[#999] placeholder-opacity-50 focus:placeholder-opacity-100 focus:placeholder-[#ff00009f]"
             value={name}
             onChange={taskNameHandler}
           />
         </div>
-        <div className="form-control">
+        <div className="form-control flex flex-col md:flex-row">
           <label
             htmlFor="DueDate"
             className="mr-2 text-white text-lg font-bold"
@@ -57,16 +57,16 @@ const TaskForm = (props) => {
           </label>
           <input
             type="date"
-            className="rounded px-3 py-1"
+            className="rounded px-3 py-1 flex-grow"
             value={dueDate}
             onChange={dateHandler}
           />
         </div>
-        <div className="flex">
+        <div className="flex justify-center md:justify-start md:col-span-1">
           <input
             type="submit"
-            value={"Save Task"}
-            className="btn btn-block bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded mt-2 md:mt-[-0.5rem]"
+            value="Save Task"
+            className="btn bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded md:ml-11 mt-2 md:mt-0 w-full md:w-auto"
           />
         </div>
       </form>

@@ -58,7 +58,7 @@ const TaskItem = (props) => {
     <div
       className={`task ${task.completed ? "border-gray-400" : ""} ${
         isEditing ? "bg-[#dda73191]" : "bg-[#d3991cea]"
-      } px-6 py-3 border-b-2 m-1 border-gray-200 rounded grid grid-cols-3 md:grid-cols-3 gap-4 items-center`}
+      } px-4 py-3 border-b-2 m-2 border-gray-200 rounded grid grid-cols-3 md:grid-cols-3 gap-4 items-center`}
     >
       <div className="flex items-center col-span-2 md:col-span-1">
         <input
@@ -70,7 +70,7 @@ const TaskItem = (props) => {
         {isEditing ? (
           <div className="flex flex-col md:flex-row flex-1 gap-2">
             <input
-              className="border-b-5 p-1 text-red-500 rounded-md focus:outline-none focus:border-blue-800 flex-1"
+              className="border-b-5 p-1 w-[10rem] md:w-[14.2rem] text-red-500 rounded-md focus:outline-none focus:border-blue-800 flex-1"
               type="text"
               value={editedName}
               onChange={editingChangeHandler}
@@ -79,7 +79,7 @@ const TaskItem = (props) => {
               type="date"
               value={editedDueDate}
               onChange={editingDueDateChangeHandler}
-              className="border-b-5 p-1 text-red-500 rounded-md focus:outline-none focus:border-blue-800 flex-1"
+              className="border-b-5 p-1 w-[10rem] md:w-[14.2rem] text-red-500 rounded-md focus:outline-none focus:border-blue-800 flex-1"
             />
           </div>
         ) : (
