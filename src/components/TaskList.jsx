@@ -1,6 +1,7 @@
 // TaskList.jsx
 import PropTypes from "prop-types";
 import TaskItem from "./TaskItem";
+import TaskFilter from "../TaskFilter";
 
 
 
@@ -13,6 +14,7 @@ const onEdit = props.onEdit;
 
   return (
     <div className="row">
+      <TaskFilter/>
       <div className="col-12 lg:pl-6">
         {tasks.map((task) => {
           return <TaskItem task={task} onDelete={onDelete} onToggle={onToggle} onEdit={onEdit} key={task.id}></TaskItem>;

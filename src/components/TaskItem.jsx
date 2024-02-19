@@ -88,6 +88,7 @@ const TaskItem = (props) => {
               className={`cursor-pointer font-semibold ${
                 task.completed ? "text-[#cf0202c2] line-through" : "text-black"
               } flex-1`}
+              onClick={toggleHandler}
               onDoubleClick={editHandler}
             >
               {task.name}
@@ -98,6 +99,8 @@ const TaskItem = (props) => {
                   ? "text-[#cf0202c2] line-through"
                   : "text-gray-500"
               }`}
+              onClick={toggleHandler}
+              onDoubleClick={editHandler}
             >
               {task.dueDate}
             </div>
