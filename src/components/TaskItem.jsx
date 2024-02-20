@@ -15,7 +15,9 @@ const TaskItem = (props) => {
 
   const toggleHandler = () => {
     if (!isEditing) {
-      onToggle(task.id);
+      const newCompleted = !task.completed;
+      onToggle(task.id, newCompleted);
+      // onToggle(task.id);
     }
   };
 

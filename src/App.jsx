@@ -15,7 +15,7 @@ function App() {
       dueDate: "2023-01-02",
       completed: true,
     },
-    { name: "Read ", id: 2, dueDate: "2023-01-01", completed: null },
+    { name: "Read ", id: 2, dueDate: "2023-01-01", completed: false },
   ];
   //State to control Task Input
   const [tasks, setTasks] = useState(dummy);
@@ -47,10 +47,10 @@ function App() {
     //the task with the matching id is excluded from the new array.
   };
 
-  const toggleTask = (id) => {
+  const toggleTask = (id, newCompleted) => {
     setTasks(
       tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
+        task.id === id ? { ...task, completed: newCompleted } : task
       )
     );
     //maps through each element and makes changes to the current ID element.
