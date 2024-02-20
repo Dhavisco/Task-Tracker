@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import TaskList from "./components/TaskList";
-import TaskForm from "./components/TaskForm";
+import NewTask from "./components/NewTask";
 
 function App() {
   //Other features I am thinking of adding:
@@ -70,7 +70,7 @@ function App() {
   return (
     <div className="App flex items-center justify-center">
       <div className="container">
-        <TaskForm onAdd={addTask}></TaskForm>
+        <NewTask onAdd={addTask}></NewTask>
         <TaskList
           tasks={tasks}
           onDelete={deleteTask}

@@ -6,8 +6,11 @@ const TaskFilter = (props) => {
   const tasks = props.tasks;
   const onFilter = props.onFilter;
 
-
   const [filter, setFilter] = useState("all");
+
+   if (tasks.length <= 0) {
+     return;
+   }
 
   const filterChangeHandler = (event) => {
 
@@ -18,9 +21,6 @@ const TaskFilter = (props) => {
 
     onFilter(filterTasks(newFilter));
   };
-
-
-
 
   const filterTasks = (filter) => {
      switch (filter) {
@@ -35,6 +35,7 @@ const TaskFilter = (props) => {
      }
   };
 
+  
   return (
     <div className="flex justify-center m-4">
       <label htmlFor="taskFilter" className="mr-2 font-medium text-gray-700">

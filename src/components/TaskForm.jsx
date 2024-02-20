@@ -3,6 +3,7 @@ import { useState } from "react";
 
 const TaskForm = (props) => {
   const onAdd = props.onAdd;
+  const onCancel = props.onCancel;
 
   const [name, setName] = useState("");
   const [dueDate, setDueDate] = useState("")
@@ -24,8 +25,13 @@ const TaskForm = (props) => {
   const dateHandler = (event) => {
     setDueDate(event.target.value)
 }
+
+const cancelHandler = () => {
+  onCancel(); // calls function to exit editing mode
+}
+
   return (
-    <div className="lg:ml-7 m-2 my-5 md:p-8 py-8 bg-[#291403] rounded-lg">
+    <div className="lg:ml-7 m-2 my-5 md:p-8 py-8 bg-[#291403] rounded-lg w-full">
       <div className="text-center text-white text-lg font-semibold mb-2 md:mb-4">
         Would You Like To Add A New Task?
       </div>
@@ -69,6 +75,14 @@ const TaskForm = (props) => {
             className="btn bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded md:ml-11 mt-2 md:mt-0 w-full md:w-auto"
           />
         </div>
+        <div className="flex justify-center md:justify-start md:col-span-1">
+          <input
+            type="button"
+            value="Cancel"
+            onClick={cancelHandler}
+            className="btn bg-[#d3991cea] hover:bg-[#d3991ce0] text-white font-bold py-2 px-4 rounded md:ml-11 mt-2 md:mt-0 w-full md:w-auto"
+          />
+        </div>
       </form>
     </div>
   );
@@ -76,5 +90,6 @@ const TaskForm = (props) => {
 
 TaskForm.propTypes = {
   onAdd: propTypes.func,
+  onCancel: propTypes.func,
 };
 export default TaskForm;
